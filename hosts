@@ -1,6 +1,7 @@
 [windows-server]
 #WIN-A939FGO05OK
-PN-WIN2K16-DEV6
+#PN-WIN2K16-DEV6
+10.10.10.20
 
 [windows-server:vars]
 ansible_user=parag
