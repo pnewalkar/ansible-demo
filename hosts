@@ -1,0 +1,9 @@
+[windows-server]
+#WIN-A939FGO05OK
+PN-WIN2K16-DEV6
+
+[windows-server:vars]
+ansible_user=parag
+ansible_password=Callmedi4
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
