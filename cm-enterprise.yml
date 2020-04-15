@@ -1,0 +1,18 @@
+- hosts: all
+  tasks:
+  - name: check "callmedia enterprise" service exists
+    win_shell: Get-Service -name "callmedia enterprise" -ea SilentlyContinue | Select-Object -Property status | Format-List
+    register: callmedia enterprise_status
+
+#  - name: debug
+#    debug:
+#       var: "callmedia enterprise_status"
+
+  - name: Stop and disable enterprise service
+#    debug:
+#       msg: "status in w32time_status"
+    win_service:
+      name: "callmedia enterprise"
+      state: stopped
+      start_mode: auto
+#   when: callmedia enterprise_status.stdout | search("Status")

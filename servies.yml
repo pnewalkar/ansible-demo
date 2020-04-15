@@ -1,9 +1,0 @@
-- name: stop service
-  win_service:
-    name: callmedia enterprise 
-    state: stop
-
-- name: Stop a callmediaservice
-  win_service:
-    name: callmedia enterprise
-    state: start
