@@ -1,4 +1,4 @@
-- name: stop a callmediaservice
+- name: stop service
   win_service:
     name: callmedia enterprise 
     state: stop
