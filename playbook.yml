@@ -1,7 +1,7 @@
-- hosts: all
-  become: true
-  roles:
-    - azure_devops_agent
+# This playbook uses the win_ping module to test connectivity to Windows hosts
+- name: Ping 
+  hosts: all 
 
-  vars_files:
-    - vars.yml
+  tasks:
+  - name: ping
+    win_ping:
