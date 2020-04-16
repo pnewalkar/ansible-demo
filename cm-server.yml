@@ -1,0 +1,78 @@
+# Stop callmedia server Service
+- hosts: all
+  tasks:
+  - name: check "callmedia server" service exists
+    win_shell: Get-Service -name "callmedia server" -ea SilentlyContinue | Select-Object -Property status | Format-List
+    register: callmedia server_status
+
+#  - name: debug
+#    debug:
+#       var: "callmedia enterprise_status"
+
+  - name: Stop and disable enterprise service
+#    debug:
+#       msg: "status in w32time_status"
+    win_service:
+      name: "callmedia server"
+      state: stopped
+      start_mode: auto
+#   when: callmedia enterprise_status.stdout | search("Status")
+
+# Taking Backup of exiting callmedia enterprise folder
+- hosts: all
+  tasks:
+  - name: Copy a single file
+    win_shell: echo %HOMEDIR%
+    args:
+      executable: cmd
+    register: homedir_out
+
+  - name: Backup of exiting callmedia enterprise folder
+    win_copy:
+      src: C:\Program Files (x86)\Callmedia\CMServer
+      dest: C:\CM-server-bck
+      remote_src: yes
+
+# copy code zip on local
+#---
+- hosts: localhost
+  tasks:
+  - name: Ansible zip file with path example
+    archive:
+      path: "/root/myagent/vsts-build/r1/a/_DevOPs\ Experiment\ -Ansible-deployment/CMServer"
+      dest: /tmp/ansible-demo/CMServer.zip
+      format: zip
+
+# copy code zip to remote machine
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Copy the code
+    win_copy:
+      src: "/tmp/ansible-demo/CMServer.zip"
+      dest: C:\\CM-enterprise-bck\\
+
+  - name: Extract code
+    win_unzip:
+      src: C:\\CM-enterprise-bck\\CMServer.zip
+      dest: C:\\Program Files (x86)\\Callmedia\\CMServer\\
+
+# Start callmedia enterprise Service
+- hosts: all
+  tasks:
+  - name: check "callmedia server" service exists
+    win_shell: Get-Service -name "callmedia server" -ea SilentlyContinue | Select-Object -Property status | Format-List
+    register: callmedia server_status
+
+#  - name: debug
+#    debug:
+#       var: "callmedia enterprise_status"
+
+  - name: Stop and disable server service
+#    debug:
+#       msg: "status in w32time_status"
+    win_service:
+      name: "callmedia server"
+      state: started
+      start_mode: auto
+#   when: callmedia enterprise_status.stdout | search("Status")
