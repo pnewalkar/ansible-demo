@@ -1,3 +1,4 @@
+# Stop callmedia enterprise Service
 - hosts: all
   tasks:
   - name: check "callmedia enterprise" service exists
@@ -16,3 +17,41 @@
       state: stopped
       start_mode: auto
 #   when: callmedia enterprise_status.stdout | search("Status")
+
+# Taking Backup of exiting callmedia enterprise folder
+- hosts: all
+  tasks:
+  - name: Copy a single file
+    win_shell: echo %HOMEDIR%
+    args:
+      executable: cmd
+    register: homedir_out
+
+  - name: Backup of exiting callmedia enterprise folder
+    win_copy:
+      src: C:\Program Files (x86)\Callmedia\CMEnterprise
+      dest: C:\CM-enterprise-bck
+      remote_src: yes
+
+#---
+- hosts: localhost
+  tasks:
+  - name: Ansible zip file with path example
+    archive:
+      path: "/root/myagent/vsts-build/r1/a/_DevOPs\ Experiment\ -Ansible-deployment/CMEnterprise"
+      dest: /tmp/ansible-demo/CMEnterprise.zip
+      format: zip
+
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Copy the code
+    win_copy:
+      src: "CMEnterprise.zip"
+      dest: C:\\CM-enterprise-bck\\
+
+  - name: Extract code
+    win_unzip:
+      src: C:\\CM-enterprise-bck\\CMEnterprise.zip
+      dest: C:\\Program Files (x86)\\Callmedia\\CMEnterprise\\
+

@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Ansible zip file with path example
+    archive:
+      path: "/root/myagent/vsts-build/r1/a/_DevOPs\ Experiment\ -Ansible-deployment/CMEnterprise"
+      dest: /tmp/ansible-demo/CMEnterprise.zip
+      format: zip
+
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Copy the code
+    win_copy:
+      src: "CMEnterprise.zip"
+      dest: C:\\CM-enterprise-bck\\
+
+  - name: Extract code    
+    win_unzip:
+      src: C:\\CM-enterprise-bck\\CMEnterprise.zip
+      dest: C:\\Program Files (x86)\\Callmedia\\CMEnterprise\\

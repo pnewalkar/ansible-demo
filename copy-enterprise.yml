@@ -1,0 +1,13 @@
+- hosts: all
+  tasks:
+  - name: Copy a single file
+    win_shell: echo %HOMEDIR%
+    args:
+      executable: cmd
+    register: homedir_out
+
+  - name: Copy File from Source to Repo
+    win_copy:
+      src: C:\Program Files (x86)\Callmedia\CMEnterprise
+      dest: C:\CM-enterprise-bck
+      remote_src: yes
