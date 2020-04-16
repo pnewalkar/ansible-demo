@@ -47,7 +47,7 @@
   tasks:
   - name: Copy the code
     win_copy:
-      src: "CMEnterprise.zip"
+      src: "/tmp/ansible-demo/CMEnterprise.zip"
       dest: C:\\CM-enterprise-bck\\
 
   - name: Extract code
