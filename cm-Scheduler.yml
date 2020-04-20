@@ -39,7 +39,7 @@
   tasks:
   - name: Ansible zip file with path example
     archive:
-      path: "/root/myagent/vsts-build/r2/a/_CMServer-with-Ansible/CMServer"
+      path: "/root/myagent/vsts-build/r3/a/_CMScheduler-with-Ansiblei/CMScheduler"
       dest: /tmp/ansible-demo/CMscheduler.zip
       format: zip
 
