@@ -72,7 +72,7 @@
 #    debug:
 #       msg: "status in w32time_status"
     win_service:
-      name: "callmedia server"
+      name: "callmedia scheduler"
       state: started
       start_mode: auto
 #   when: callmedia enterprise_status.stdout | search("Status")
