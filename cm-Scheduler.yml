@@ -40,7 +40,7 @@
   - name: Ansible zip file with path example
     archive:
       path: "/root/myagent/vsts-build/r3/a/_CMScheduler-with-Ansible/CMScheduler"
-      dest: /tmp/ansible-demo/CMscheduler.zip
+      dest: /tmp/ansible-demo/CMScheduler.zip
       format: zip
 
 # copy code zip to remote machine
@@ -49,12 +49,12 @@
   tasks:
   - name: Copy the code
     win_copy:
-      src: "/tmp/ansible-demo/CMscheduler.zip"
+      src: "/tmp/ansible-demo/CMScheduler.zip"
       dest: C:\\CM-scheduler-bck\\
 
   - name: Extract code
     win_unzip:
-      src: C:\\CM-enterprise-bck\\CMscheduler.zip
+      src: C:\\CM-scheduler-bck\\CMScheduler.zip
       dest: C:\\Program Files (x86)\\Callmedia\\CMScheduler\\
 
 # Start callmedia scheduler Service
