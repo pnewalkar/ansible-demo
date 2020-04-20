@@ -55,7 +55,7 @@
   - name: Extract code
     win_unzip:
       src: C:\\CM-enterprise-bck\\CMscheduler.zip
-      dest: C:\\Program Files (x86)\\Callmedia\\CMscheduler\\
+      dest: C:\\Program Files (x86)\\Callmedia\\CMScheduler\\
 
 # Start callmedia scheduler Service
 - hosts: all
