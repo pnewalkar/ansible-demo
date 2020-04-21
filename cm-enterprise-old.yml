@@ -1,0 +1,95 @@
+# Stop callmedia scheduler Service
+- hosts: all
+  tasks:
+  - name: check "callmedia scheduler" service exists
+    win_shell: Get-Service -name "callmedia scheduler" -ea SilentlyContinue | Select-Object -Property status | Format-List
+    register: callmedia scheduler_status
+
+#  - name: debug
+#    debug:
+#       var: "callmedia scheduler_status"
+
+  - name: Stop and disable scheduler service
+#    debug:
+#       msg: "status in w32time_status"
+    win_service:
+      name: "callmedia scheduler"
+      state: stopped
+      start_mode: auto
+#   when: callmedia enterprise_status.stdout | search("Status")
+
+# Taking Backup of exiting callmedia enterprise folder
+- hosts: all
+  tasks:
+  - name: Copy a single file
+    win_shell: echo %HOMEDIR%
+    args:
+      executable: cmd
+    register: homedir_out
+
+  - name: Backup of exiting callmedia enterprise folder
+    win_copy:
+      src: C:\Program Files (x86)\Callmedia\CMScheduler
+      dest: C:\CM-scheduler-bck
+      remote_src: yes
+
+# copy code zip on local
+#---
+- hosts: localhost
+  tasks:
+  - name: Ansible zip file with path example
+    archive:
+      path: "/root/myagent/vsts-build/r3/a/_CMScheduler-with-Ansible/CMScheduler"
+      dest: /tmp/ansible-demo/CMScheduler.zip
+      format: zip
+
+# copy code zip to remote machine
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Copy the code
+    win_copy:
+      src: "/tmp/ansible-demo/CMScheduler.zip"
+      dest: C:\\CM-scheduler-bck\\
+
+  - name: Extract code
+    win_unzip:
+      src: C:\\CM-scheduler-bck\\CMScheduler.zip
+      dest: C:\\Program Files (x86)\\Callmedia\\CMScheduler\\
+
+# Start callmedia scheduler Service
+- hosts: all
+  tasks:
+  - name: check "callmedia scheduler" service exists
+    win_shell: Get-Service -name "callmedia scheduler" -ea SilentlyContinue | Select-Object -Property status | Format-List
+    register: callmedia scheduler_status
+
+#  - name: debug
+#    debug:
+#       var: "callmedia enterprise_status"
+
+  - name: Stop and disable scheduler service
+#    debug:
+#       msg: "status in w32time_status"
+    win_service:
+      name: "callmedia scheduler"
+      state: started
+      start_mode: auto
+#   when: callmedia enterprise_status.stdout | search("Status")
+
+# Kick off Dawin Test
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Kick off Dawin Test
+    #win_shell: C:\dawin-startup.ps1
+    #win_shell: C:\temp.ps1
+    win_command: powershell.exe -ExecutionPolicy ByPass -File C:\dawin-startup.ps1
+    #args:
+    #chdir: c:\parag
+    #creates: c:\parag\somelog.txt
+    #win_shell: '.\dawin-startup.ps1' >> c:\somelog.txt
+    #become: yes
+    #become_user: parag
+    #- win_shell: C:\dawin-startup.ps1 >> c:\somelog.txt
+    #win_command: "C:\\Program Files (x86)\\Callmedia\\Darwin test head\\CpuInfoClient.exe"
