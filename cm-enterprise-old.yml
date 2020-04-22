@@ -82,8 +82,13 @@
   gather_facts: no
   tasks:
   - name: Kick off Dawin Test
-    win_command:  powershell.exe -windowstyle hidden -file C:\dawin-startup.ps1
-    #win_shell: C:\dawin-startup-old
+    #win_command: Invoke-Command {Start-Process "C:\Program Files (x86)\Callmedia\Darwin test head\CpuInfoClient.exe" -PassThru }
+    #script: 
+    #cmd : "C:\\CM-scheduler-bck\\dawin-tst.vb"
+    win_command:  powershell.exe -windowstyle hidden -file C:\dawin-timeout.ps1
+    #win_command:  powershell.exe -windowstyle hidden -file C:\temp-bg.ps1
+  - meta: end_play
+    #win_shell: cscript C:\dawin-timeout.ps1
     #win_command: powershell.exe -executionpolicy bypass -noninteractive -nologo -File "C:\dawin-startup.ps1"
     #win_command: Start-Process -windowstyle hidden -FilePath "C:\Program Files (x86)\Callmedia\Darwin test head\CpuInfoClient.exe"
     #win_shell: C:\temp.ps1
