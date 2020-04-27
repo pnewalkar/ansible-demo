@@ -29,7 +29,7 @@
 
   - name: Backup of exiting callmedia enterprise folder
     win_copy:
-      src: C:\Program Files (x86)\Callmedia\CMEnterprise\Callmedia Desktop
+      src: C:\Program Files (x86)\Callmedia\Callmedia Desktop
       dest: C:\CM-desktop-bck
       remote_src: yes
 
@@ -39,7 +39,7 @@
   tasks:
   - name: Ansible zip file with path example
     archive:
-      path: "/root/myagent/vsts-build/r1/a/_DevOPs\ Experiment\ -Ansible-deployment/CMDesktop"
+      path: "/root/myagent/_work/r2/a/_Callmedia Desktop"
       dest: /tmp/ansible-demo/CMDesktop.zip
       format: zip
 
@@ -54,7 +54,7 @@
 
   - name: Extract code
     win_unzip:
-      src: C:\\CM-enterprise-bck\\CMEnterprise.zip
+      src: C:\\CM-enterprise-bck\\CMDesktop.zip
       dest: C:\\Program Files (x86)\\Callmedia\\Callmedia Desktop\\
 
 # Start callmedia enterprise Service
