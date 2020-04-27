@@ -2,3 +2,6 @@ Check the powershell Version. Ansible recommned to install latest version of pow
 >>$PSVersionTable.PSVersion.
 
 If you don't have latest version of powershell download and run "Upgrading PowerShell and .NET Framework.ps1" from repo.
+
+Configuring & Enable WinRM - 
+Download and excutute on "ConfigureRemotingForAnsible.ps1"remote machine
