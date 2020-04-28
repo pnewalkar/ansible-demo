@@ -1,8 +1,8 @@
 # Stop callmedia desktop Service
-#- hosts: all
-#  tasks:
-#  - name: check "callmedia desktop" service exists
-#    win_shell: Get-Service -name "callmedia desktop" -ea SilentlyContinue | Select-Object -Property status | Format-List
+- hosts: all
+  tasks:
+  - name: check "callmedia desktop" service exists
+    win_command: taskkill /IM "cmDesktop.exe" /F
 #    register: callmedia desktop_status
 
 #  - name: debug
@@ -58,10 +58,12 @@
       dest: C:\\Program Files (x86)\\Callmedia\\Callmedia Desktop\\
 
 # Start callmedia enterprise Service
-#- hosts: all
-#  tasks:
-#  - name: check "Callmedia Desktop" service exists
-#    win_shell: Get-Service -name "Callmedia Desktop" -ea SilentlyContinue | Select-Object -Property status | Format-List
+- hosts: all
+  tasks:
+  - name: check "Callmedia Desktop" service running
+    #win_command: Start-Process -FilePath C:\Users\parag\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Callmedia Expert Contact\Desktop.lnk
+    win_command:  powershell.exe -windowstyle hidden -file C:\startCMD.ps1
+
 #    register: callmedia enterprise_status
 
 #  - name: debug
