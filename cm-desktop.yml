@@ -27,7 +27,7 @@
       executable: cmd
     register: homedir_out
 
-  - name: Backup of exiting callmedia enterprise folder
+  - name: Backup of exiting callmedia Desktop folder
     win_copy:
       src: C:\Program Files (x86)\Callmedia\Callmedia Desktop
       dest: C:\CM-desktop-bck
@@ -62,7 +62,7 @@
   tasks:
   - name: check "Callmedia Desktop" service running
     #win_command: Start-Process -FilePath C:\Users\parag\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Callmedia Expert Contact\Desktop.lnk
-    win_command:  powershell.exe -windowstyle hidden -file C:\startCMD.ps1
+    win_command:  powershell.exe -windowstyle hidden -file C:\start-desktop-CMD.ps1
 
 #    register: callmedia enterprise_status
 
