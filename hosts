@@ -1,7 +1,7 @@
 [windows-server]
 #PN-WIN2K16-DEV6
-WIN-A939FGO05OK
-#PN-W2K16-INST2
+#WIN-A939FGO05OK
+PN-W2K16-INST2
 
 
 [windows-server:vars]
