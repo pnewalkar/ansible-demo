@@ -1,0 +1,33 @@
+# This script is an example about using an Ansible playbook for downloading and
+# installing latest STAGING release version of GXtest for GeneXus 16
+#
+# Prerequisites:
+# .- Installed GeneXus v16 on the Remote HOST
+# .- defined environment variable named GX_PATH (poiting to GX installation)
+# .- GeneXus IDE must be closed to enable the extension installation.
+#
+
+- hosts: all
+  gather_facts: True
+  vars:
+  #- gxtest_folder: c:\
+  # => Change this value to 'master' to get latest stable version.
+  #- gxtest_branch: staging
+
+  tasks:
+    #- debug:
+        #msg: "{{ ansible_env.GX_PATH }}"
+
+    - name: Install Dawin Test tool
+      win_psexec:
+        #command: '"{{ ansible_env.GX_PATH }}\\dawin-batch" /install /measureCommandTime'
+        executable: C:\PsExec64.exe
+        #command:  'powershell.exe -noninteractive -nologo -file C:\dawin-batch-org.ps1'
+        command:  'powershell.exe -noninteractive -nologo -file C:\sql-final-Darwin.ps1'
+        #command: C:\Program Files (x86)\Callmedia\Darwin test head\CpuInfoClient.exe" -c -v -mn SIM_U1
+        priority: high
+        username: 'parag'
+        password: Callmedi4
+        interactive: yes
+
+        #chdir: "{{ ansible_env.GX_PATH }}"
