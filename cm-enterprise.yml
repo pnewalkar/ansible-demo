@@ -55,7 +55,8 @@
   - name: Extract code
     win_unzip:
       src: C:\\CM-enterprise-bck\\CMEnterprise.zip
-      dest: C:\\Program Files (x86)\\Callmedia\\CMEnterprise\\
+      dest: C:\\Program Files (x86)\\Callmedia\\CMEnterprise
+      #dest: C:\\Program Files (x86)\\Callmedia\\CMEnterprise\\
 
 # Start callmedia enterprise Service
 - hosts: all
