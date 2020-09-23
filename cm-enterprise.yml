@@ -39,7 +39,7 @@
   tasks:
   - name: Ansible zip file with path example
     archive:
-      path: "/root/myagent/vsts-build/r1/a/_DevOPs\ Experiment\ -Ansible-deployment/CMEnterprise"
+      path: "/root/myagent/_work/r3/a/_Callmedia Enterprise/CMEnterprise"
       dest: /tmp/ansible-demo/CMEnterprise.zip
       format: zip
 
