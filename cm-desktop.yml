@@ -1,22 +1,22 @@
 # Stop callmedia desktop Service
-#- hosts: all
-#  tasks:
-#  - name: check "callmedia desktop" service exists
-#    win_command: taskkill /IM "cmDesktop.exe" /F
-#    register: callmedia desktop_status
+- hosts: all
+  tasks:
+  - name: check "callmedia desktop" service exists
+    win_command: taskkill /IM "cmDesktop.exe" /F
+    register: callmedia desktop_status
 
-#  - name: debug
-#    debug:
-#       var: "callmedia desktop_status"
+  - name: debug
+    debug:
+       var: "callmedia desktop_status"
 
-#  - name: Stop and disable desktop service
-#    debug:
-#       msg: "status in w32time_status"
-#    win_service:
-#      name: "callmedia desktop"
-#      state: stopped
-#      start_mode: auto
-#   when: callmedia desktop_status.stdout | search("Status")
+  - name: Stop and disable desktop service
+    debug:
+       msg: "status in w32time_status"
+    win_service:
+      name: "callmedia desktop"
+      state: stopped
+      start_mode: auto
+  when: callmedia desktop_status.stdout | search("Status")
 
 # Taking Backup of exiting callmedia desktop folder
 - hosts: all
