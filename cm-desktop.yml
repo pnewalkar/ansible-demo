@@ -12,9 +12,9 @@
   - name: Stop and disable desktop service
     debug:
        msg: "status in w32time_status"
-#    win_service:
-#      name: "callmedia desktop"
-#      state: stopped
+    win_service:
+      name: "callmedia desktop"
+      state: stopped
 #      start_mode: auto
 # when: callmedia desktop_status.stdout | search("Status")
 
