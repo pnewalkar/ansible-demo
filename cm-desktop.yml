@@ -1,13 +1,13 @@
 # Stop callmedia desktop Service
-#- hosts: all
-#  tasks:
-#  - name: check "callmedia desktop" service exists
-#    win_command: taskkill /IM "cmDesktop.exe" /F
-#    register: callmedia desktop_status
+- hosts: all
+  tasks:
+  - name: check "callmedia desktop" service exists
+    win_command: taskkill /IM "cmDesktop.exe" /F
+    register: callmedia desktop_status
 
-#  - name: debug
-#    debug:
-#       var: "callmedia desktop_status"
+  - name: debug
+    debug:
+       var: "callmedia desktop_status"
 
 #  - name: Stop and disable desktop service
 #    debug:
