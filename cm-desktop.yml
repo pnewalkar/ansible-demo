@@ -15,7 +15,7 @@
     win_service:
       name: "callmedia desktop"
       state: stopped
-#      start_mode: auto
+      start_mode: auto
 # when: callmedia desktop_status.stdout | search("Status")
 
 # Taking Backup of exiting callmedia desktop folder
