@@ -16,7 +16,7 @@
       name: "callmedia desktop"
       state: stopped
       start_mode: auto
-  when: callmedia desktop_status.stdout | search("Status")
+# when: callmedia desktop_status.stdout | search("Status")
 
 # Taking Backup of exiting callmedia desktop folder
 - hosts: all
