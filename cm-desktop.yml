@@ -3,7 +3,7 @@
   tasks:
   - name: check "callmedia desktop" service exists
     win_command: taskkill /IM "cmDesktop.exe" /F
-#    register: callmedia desktop_status
+    register: callmedia desktop_status
 
 #  - name: debug
 #    debug:
