@@ -19,10 +19,10 @@
 #`   when: callmedia desktop_status.stdout | search("Status")
 
 # Stop callmedia desktop Service
-- hosts: all
-  tasks:
-  - name: check "callmedia desktop" service exists
-    win_command: taskkill /IM "cmDesktop.exe" /F
+#- hosts: all
+#  tasks:
+#  - name: check "callmedia desktop" service exists
+#    win_command: taskkill /IM "cmDesktop.exe" /F
 
 
 # Taking Backup of exiting callmedia desktop folder
